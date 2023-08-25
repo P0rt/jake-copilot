@@ -1,71 +1,51 @@
-# jake-copilot README
+# VSCode API Extension
 
-This is the README for your extension "jake-copilot". After writing up a brief description, we recommend including the following sections.
+This extension for Visual Studio Code allows you to send requests to your API and receive responses directly within the editor.
 
 ## Features
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+- Send requests to the API at: https://jake-my-copilot-2a9c2ff6d8fb.herokuapp.com/predict
+- Display responses from the API within VSCode.
 
-For example if there is an image subfolder under your extension project workspace:
+## Installation
 
-\!\[feature X\]\(images/feature-x.png\)
+1. Clone the repository to your computer.
+2. Open the extension folder in VSCode.
+3. Run `npm install` to install the necessary dependencies.
+4. Press `F5` to launch the extension in debug mode.
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+## Usage
 
-## Requirements
+1. Open the command palette (`Ctrl+Shift+P` or `Cmd+Shift+P` on Mac).
+2. Type "Get API Response" and press Enter.
+3. View the response from your API in a notification.
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+## TODO
 
-## Extension Settings
+- [ ] Test the extension with the actual API.
+- [ ] Register on the Visual Studio Marketplace.
+- [ ] Publish the extension on the Visual Studio Marketplace.
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+## API
 
-For example:
+Your API was built using Flask and Flask-RESTful. Here's its main code:
 
-This extension contributes the following settings:
+```python
+from flask import Flask, request, jsonify
+from flask_restful import Api, Resource
 
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
+app = Flask(__name__)
+api = Api(app)
 
-## Known Issues
+class Predict(Resource):
+    def post(self):
+        # Retrieving data from the request
+        data = request.get_json(force=True)
+        code_input = data.get("code", "")
+        output = f"Received: {code_input}. Here will be the output of your model based on the input data."
+        return jsonify({"prediction": output})
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
+api.add_resource(Predict, "/predict")
 
-## Release Notes
-
-Users appreciate release notes as you update your extension.
-
-### 1.0.0
-
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
----
-
-## Following extension guidelines
-
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
-
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
-
-## Working with Markdown
-
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
-
-## For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+if __name__ == "__main__":
+    app.run(debug=True, port=5000)
