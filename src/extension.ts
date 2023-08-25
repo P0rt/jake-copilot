@@ -1,5 +1,6 @@
 import * as vscode from 'vscode';
-import * as axios from 'axios'; // Используем библиотеку axios для HTTP-запросов
+import axios from 'axios';
+ // Используем библиотеку axios для HTTP-запросов
 
 export function activate(context: vscode.ExtensionContext) {
     let disposable = vscode.commands.registerCommand('extension.getApiResponse', async () => {
@@ -9,9 +10,9 @@ export function activate(context: vscode.ExtensionContext) {
             });
 
             vscode.window.showInformationMessage(`API Response: ${response.data.prediction}`);
-        } catch (error) {
-            vscode.window.showErrorMessage(`Error fetching API: ${error.message}`);
-        }
+					} catch (error: any) {
+						vscode.window.showErrorMessage(`Error fetching API: ${error.message}`);
+				}				
     });
 
     context.subscriptions.push(disposable);
