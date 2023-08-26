@@ -2,6 +2,12 @@
 
 This extension for Visual Studio Code allows you to send requests to your API and receive responses directly within the editor.
 
+## For tests
+ 
+- Push `Start Debugging` from `Run` menu  
+- Push `Cmd+Shift+P` 
+- Type in menu `Get API Response`
+
 ## Features
 For tests:  
 - Push `Start Debugging` from `Run` menu  
