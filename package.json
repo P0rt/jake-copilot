@@ -16,7 +16,11 @@
       {
         "command": "jake-copilot.helloWorld",
         "title": "Hello World"
-      }
+      },
+      {
+        "command": "extension.getApiResponse",
+        "title": "Get API Response"
+    }
     ]
   },
   "scripts": {

@@ -3,6 +3,12 @@
 This extension for Visual Studio Code allows you to send requests to your API and receive responses directly within the editor.
 
 ## Features
+For tests:  
+- Push `Start Debugging` from `Run` menu  
+- Push `Cmd+Shift+P` 
+- Type in menu `Get API Response`
+
+## Features
 
 - Send requests to the API at: https://jake-my-copilot-2a9c2ff6d8fb.herokuapp.com/predict
 - Display responses from the API within VSCode.
